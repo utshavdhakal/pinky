@@ -1,1 +1,22 @@
-+-*/
++ - * /
+-- This is a single line comment.
++ - * /
+-- This is a single line comment.
+
+~ ~=
+; ; ;
+== > < >= <= 
+
+:= = == :
+
+2569 + 3173
+
+424324.43543857 + 43257349857 - 423423523.52423842384
+
+"This is a String."
+"This is a another String."
+
+'This is a String using single quote.'
+'Bye'
+
+the_Val := 2353245 + _constant

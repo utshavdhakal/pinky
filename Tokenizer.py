@@ -25,6 +25,10 @@ class Tokenizer:
         if self.current() == char: return True
         else: return False
 
+    def peek_match(self, char):
+        if (self.peek() == char): return True
+        else: return False
+
     def match_forward(self, char):
         if self.peek() == char:
             self.forward()
@@ -40,8 +44,17 @@ class Tokenizer:
             if self.match(' '):
                 pass
 
+            elif self.match(','):
+                self.add_token(COMMA)
+
             elif self.match(';'):
                 self.add_token(SEMICOLON)
+
+            elif self.match('('):
+                self.add_token(OPEN_PAREN)
+
+            elif self.match(')'):
+                self.add_token(CLOSE_PAREN)
 
             elif self.match( '+'):
                 self.add_token(PLUS)
@@ -96,7 +109,24 @@ class Tokenizer:
                     self.add_token(FLOAT)
                 else:
                     self.add_token(INTEGER)
-            
+
+            elif self.match("\"") or self.match("'"):
+                self.forward()
+                self.start = self.curr
+
+                while not(self.peek_match(char)): self.forward()
+                self.add_token(STRING)
+
+                self.forward()
+
+            elif char.isalpha() or char == '_':
+                while self.peek().isalnum() or self.peek_match('_'): self.forward()
+                token = self.source[self.start : self.curr + 1]
+
+                if (keywords.get(token) != None):
+                    self.add_token(keywords[token])
+                else:
+                    self.add_token(IDENTIFIER)
             
             self.forward()
 
