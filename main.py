@@ -1,4 +1,6 @@
 import sys
+sys.path.append('src')
+
 from Tokenizer import Tokenizer
 
 if __name__ == "__main__":
